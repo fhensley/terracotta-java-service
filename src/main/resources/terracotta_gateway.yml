@@ -1,0 +1,19 @@
+cloud_controller_uri: http://api.vcap.me
+service:
+  name: terracotta
+  version: "3.7.5"
+  description: 'Terracotta service'
+  plans: ['free']
+  default_plan: free
+  tags: ['terracotta', 'terracotta-3.7.5', 'distributed', 'cache']
+ip_route: localhost
+index: 0
+token: changeterracottatoken
+logging:
+  level: debug
+mbus: nats://localhost:4222/
+
+terracotta:
+    host: 
+    port: 
+    auth_token: blah 
