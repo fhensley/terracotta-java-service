@@ -9,6 +9,7 @@
         "
         default-lazy-init="true">
 
-    <cf:yaml-properties id="yaml" resource="classpath:terracotta_gateway.yml" />
+    <cf:yaml-properties id="gateway" resource="classpath:terracotta_gateway.yml" />
+    <cf:yaml-properties id="node" resource="classpath:terracotta_node.yml" />
 
 </beans>

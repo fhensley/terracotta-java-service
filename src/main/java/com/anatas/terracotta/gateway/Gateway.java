@@ -13,14 +13,15 @@ import com.anatas.terracotta.Config;
 
 public class Gateway {
     private Gateway() {
+        createGateway();
     }
 
-    public Gateway(int port) throws Exception {
-
+    private void createGateway() {
         try (ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("classpath:yamlPropertiesContext.xml")) {
-            final Map<String, Object> yaml = context.getBean("yaml", Map.class);
+            final Map<String, Object> yaml = context.getBean("gateway", Map.class);
 
-            try (final SimpleHttpServer server = new SimpleHttpServer(new InetSocketAddress(port))) {
+            try (final SimpleHttpServer server = new SimpleHttpServer(new InetSocketAddress(
+                    (Integer) ((Map<String, Object>) yaml.get(Config.GATEWAY.toString())).get(Config.AUTH_TOKEN.toString())))) {
 
                 final TerracottaProvisioner provisioner = new TerracottaProvisioner();
                 new GatewayServer(server, provisioner, (String) ((Map<String, Object>) yaml.get(Config.GATEWAY.toString())).get(Config.AUTH_TOKEN.toString()));
